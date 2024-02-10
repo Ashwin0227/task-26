@@ -45,6 +45,8 @@ export const GetUserData = ({ setRes, users, setUsers }) => {
       setRes(response.message);
     } catch (err) {
       setRes(err.message);
+      const deletedUsers = await users.filter((user) => user.Customer_ID !== id);
+      await setUsers(deletedUsers);
     }
   };
 
@@ -80,6 +82,14 @@ export const GetUserData = ({ setRes, users, setUsers }) => {
       setRes(response.message);
     } catch (err) {
       setRes(err.message);
+      setUsers(
+        users.map((editUser) => {
+          if (editUser.Customer_ID === user.Customer_ID) {
+            return Object.assign(editUser, user);
+          }
+          return editUser;
+        })
+      );
     }
   };
   return (

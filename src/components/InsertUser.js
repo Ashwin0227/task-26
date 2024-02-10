@@ -49,6 +49,8 @@ export const InsertUser = ({ setRes, users, setUsers }) => {
       history.push("/");
     } catch (err) {
       setRes("invalid input!");
+      setUsers([...users, user]);
+      history.push("/");
     }
   };
   return (
